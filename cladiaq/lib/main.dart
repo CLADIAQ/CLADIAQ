@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:cladiaq/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'welcome/welcome.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  final onboarding = prefs.getBool("onboarding") ?? false;
+  final onboarding = prefs.getBool("onboarding") ?? true;
+  log(onboarding.toString());
   runApp(MyApp(
     onboarding: onboarding,
   ));
