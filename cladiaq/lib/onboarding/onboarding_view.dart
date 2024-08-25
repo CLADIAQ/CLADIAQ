@@ -1,6 +1,7 @@
 import 'package:cladiaq/onboarding/onboarding_items.dart';
 import 'package:cladiaq/welcome/welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingView extends StatefulWidget {
@@ -85,12 +86,17 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   Widget getStarted(context) {
     return Container(
-      decoration: const BoxDecoration(color: Color(0xff56ADF0)),
+      decoration: const BoxDecoration(
+          color: Color(0xff56ADF0),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
       width: MediaQuery.of(context).size.width * .95,
       height: 50,
       child: Center(
         child: TextButton(
-            onPressed: () {
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              prefs.setBool("onboarding", true);
+              if (!mounted) return;
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

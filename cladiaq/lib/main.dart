@@ -1,14 +1,21 @@
 import 'package:cladiaq/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'welcome/welcome.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final onboarding = prefs.getBool("onboarding") ?? false;
+  runApp(MyApp(
+    onboarding: onboarding,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool onboarding;
+  const MyApp({Key? key, required this.onboarding}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -19,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OnboardingView(),
+      home: onboarding ? const WelcomePage() : const OnboardingView(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -86,7 +87,10 @@ class _WelcomePageState extends State<WelcomePage> {
               right: 20,
               child: GestureDetector(
                 child: Image.asset('assets/icons/next.png'),
-                onTap: () {},
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.setBool("onboarding", false);
+                },
               )),
         ],
       ),
