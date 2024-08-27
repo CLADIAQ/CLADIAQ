@@ -1,5 +1,6 @@
 import 'package:cladiaq/onboarding/onboarding_items.dart';
 import 'package:cladiaq/welcome/welcome.dart';
+import 'package:cladiaq/widgets/cq_button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -23,7 +24,18 @@ class _OnboardingViewState extends State<OnboardingView> {
         color: Colors.white,
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: isLastPage
-            ? getStarted(context)
+            ? CqButton(
+                title: "Get Started",
+                onPressedCq: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.setBool("onboarding", true);
+                  if (!mounted) return;
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const WelcomePage())));
+                },
+              )
             : Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 TextButton(
                     onPressed: () => pageController
@@ -86,14 +98,15 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   Widget getStarted(context) {
     return Container(
-      decoration: const BoxDecoration(
-          color: Color(0xff56ADF0),
-          borderRadius: BorderRadius.all(Radius.circular(10))),
-      width: MediaQuery.of(context).size.width * .95,
-      height: 50,
-      child: Center(
-        child: TextButton(
-            onPressed: () async {
+        decoration: const BoxDecoration(
+            color: Color(0xff56ADF0),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        width: MediaQuery.of(context).size.width * .95,
+        height: 50,
+        child: Center(
+          child: CqButton(
+            title: "Get Started",
+            onPressedCq: () async {
               final prefs = await SharedPreferences.getInstance();
               prefs.setBool("onboarding", true);
               if (!mounted) return;
@@ -102,11 +115,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                   MaterialPageRoute(
                       builder: ((context) => const WelcomePage())));
             },
-            child: const Text(
-              "Get Started",
-              style: TextStyle(color: Colors.white),
-            )),
-      ),
-    );
+          ),
+        ));
   }
 }
