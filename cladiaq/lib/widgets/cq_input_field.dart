@@ -32,8 +32,8 @@ class CqInputField extends StatelessWidget {
           contentPadding:
               const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           filled: true,
-          prefix: leading,
-          suffix: trailing != null
+          prefixIcon: leading,
+          suffixIcon: trailing != null
               ? GestureDetector(onTap: trailingTapped, child: trailing)
               : null,
           fillColor: cqVeryLightGreyColor,
@@ -42,7 +42,7 @@ class CqInputField extends StatelessWidget {
           errorBorder: circularBorder.copyWith(
               borderSide: const BorderSide(color: cqDanger)),
           focusedBorder: circularBorder.copyWith(
-              borderSide: const BorderSide(color: cqPrimaryColor)),
+              borderSide: const BorderSide(color: cqMediumGreyColor)),
           enabledBorder: circularBorder.copyWith(
               borderSide: const BorderSide(color: cqLightGreyColor))),
     );

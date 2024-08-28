@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +27,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ThemeData().colorScheme.copyWith(
+              primary: cqFocusColor,
+            ),
       ),
       home: onboarding ? const WelcomePage() : const OnboardingView(),
     );
