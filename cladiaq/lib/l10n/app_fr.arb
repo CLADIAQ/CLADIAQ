@@ -1,0 +1,10 @@
+{
+    "@@locale": "fr",
+    "language": "Français",
+    "@language": {
+        "description": "Langue sélectionnée"
+    },
+    "helloWorld": "Bonjour le monde!",
+    "twoLanguages": "Cette application a 2 langues",
+    "changeLanguage": "Changer de langue"
+}

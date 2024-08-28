@@ -39,12 +39,14 @@ class CqButton extends StatelessWidget {
             : BoxDecoration(
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: cqPrimaryColor, width: 1)),
+                border: Border.all(color: cqMediumGreyColor, width: 1)),
         child: !busy
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (leading != null) leading!,
+                  Container(
+                    child: leading != null ? leading! : null,
+                  ),
                   if (leading != null)
                     const SizedBox(
                       width: 5,
@@ -54,7 +56,7 @@ class CqButton extends StatelessWidget {
                     style: bodyStyle.copyWith(
                         fontWeight:
                             !outline ? FontWeight.bold : FontWeight.w400,
-                        color: !outline ? Colors.white : cqPrimaryColor),
+                        color: !outline ? Colors.white : cqMediumGreyColor),
                   )
                 ],
               )

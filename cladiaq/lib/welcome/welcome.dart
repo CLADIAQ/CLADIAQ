@@ -1,3 +1,8 @@
+import 'package:cladiaq/commons/colors.dart';
+import 'package:cladiaq/commons/ui_helpers.dart';
+import 'package:cladiaq/widgets/cq_button.dart';
+import 'package:cladiaq/widgets/cq_input_field.dart';
+import 'package:cladiaq/widgets/cq_text.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,74 +32,133 @@ class _WelcomePageState extends State<WelcomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: Stack(
+      body: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
         children: [
-          Center(
-            child: Column(
-              // Column is also a layout widget. It takes a list of children and
-              // arranges them vertically. By default, it sizes itself to fit its
-              // children horizontally, and tries to be as tall as its parent.
-              //
-              // Invoke "debug painting" (press "p" in the console, choose the
-              // "Toggle Debug Paint" action from the Flutter Inspector in Android
-              // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-              // to see the wireframe for each widget.
-              //
-              // Column has various properties to control how it sizes itself and
-              // how it positions its children. Here we use mainAxisAlignment to
-              // center the children vertically; the main axis here is the vertical
-              // axis because Columns are vertical (the cross axis would be
-              // horizontal).
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(
-                  height: 30,
-                ),
-                Center(
-                  child: Image.asset('assets/images/ima.jpg'),
-                ),
-                const SizedBox(
-                  height: 70,
-                ),
-                const Text(
-                  'Healthy Spaces Better',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
-                ),
-                const Text(
-                  'Lives',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                const Text(
-                  'Living Well has never been',
-                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 28),
-                ),
-                const Text(
-                  'so easy as with CLADIAQ',
-                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 28),
-                ),
-                const SizedBox(
-                  height: 50,
-                )
-              ],
-            ),
-          ),
-          Positioned(
-              bottom: 5,
-              right: 20,
-              child: GestureDetector(
-                child: Image.asset('assets/icons/next.png'),
-                onTap: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  prefs.setBool("onboarding", false);
-                },
-              )),
+          CqText.heading1("Design System"),
+          verticalSpaceSmall,
+          Divider(),
+          verticalSpaceSmall,
+          ...buttonWidgets,
+          ...textFields,
+          ...inputFields,
         ],
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
+      // body: Stack(
+      //   children: [
+      //     Center(
+      //       child: Column(
+
+      //         mainAxisAlignment: MainAxisAlignment.center,
+      //         crossAxisAlignment: CrossAxisAlignment.center,
+      //         children: <Widget>[
+      //           const SizedBox(
+      //             height: 30,
+      //           ),
+      //           Center(
+      //             child: Image.asset('assets/images/ima.jpg'),
+      //           ),
+      //           const SizedBox(
+      //             height: 70,
+      //           ),
+      //           const Text(
+      //             'Healthy Spaces Better',
+      //             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+      //           ),
+      //           const Text(
+      //             'Lives',
+      //             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+      //           ),
+      //           const SizedBox(
+      //             height: 40,
+      //           ),
+      //           const Text(
+      //             'Living Well has never been',
+      //             style: TextStyle(fontWeight: FontWeight.normal, fontSize: 28),
+      //           ),
+      //           const Text(
+      //             'so easy as with CLADIAQ',
+      //             style: TextStyle(fontWeight: FontWeight.normal, fontSize: 28),
+      //           ),
+      //           const SizedBox(
+      //             height: 50,
+      //           )
+      //         ],
+      //       ),
+      //     ),
+      //     Positioned(
+      //         bottom: 5,
+      //         right: 20,
+      //         child: GestureDetector(
+      //           child: Image.asset('assets/icons/next.png'),
+      //           onTap: () async {
+      //             final prefs = await SharedPreferences.getInstance();
+      //             prefs.setBool("onboarding", false);
+      //           },
+      //         )),
+      //   ],
+      // ),
+      // // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  List<Widget> get buttonWidgets => [
+        CqText.headline("Button"),
+        verticalSpaceMedium,
+        CqText.body("Normal"),
+        verticalSpaceSmall,
+        CqButton(title: "SIGN IN", onPressedCq: () {}),
+        verticalSpaceSmall,
+        CqText.body("Disabled"),
+        verticalSpaceSmall,
+        CqButton(
+          title: "SIGN IN",
+          onPressedCq: () {},
+          disabled: true,
+        ),
+        verticalSpaceSmall,
+        CqText.body("Busy"),
+        verticalSpaceSmall,
+        CqButton(
+          title: "SIGN IN",
+          onPressedCq: () {},
+          busy: true,
+        ),
+        verticalSpaceSmall,
+        CqText.body("Outline"),
+        verticalSpaceSmall,
+        CqButton(
+          title: "SIGN IN",
+          onPressedCq: () {},
+          outline: true,
+          leading: const Icon(
+            Icons.abc,
+            color: cqMediumGreyColor,
+          ),
+        )
+      ];
+
+  List<Widget> get textFields => const [
+        verticalSpaceLarge,
+        CqText.headline("Headline"),
+        verticalSpaceMedium,
+        CqText.heading1("Heading1"),
+        verticalSpaceSmall,
+        CqText.heading2("Heading2"),
+        verticalSpaceSmall,
+        CqText.heading3("Heading3"),
+        verticalSpaceSmall,
+        CqText.subHeading("SubHeading"),
+        verticalSpaceSmall,
+        CqText.caption("Caption"),
+        verticalSpaceSmall,
+      ];
+
+  List<Widget> get inputFields => [
+        verticalSpaceLarge,
+        CqInputField(
+            leading: Icon(Icons.email),
+            trailing: Icon(Icons.remove_red_eye),
+            controller: TextEditingController())
+      ];
 }
