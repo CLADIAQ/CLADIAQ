@@ -1,5 +1,6 @@
 import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/ui_helpers.dart';
+import 'package:cladiaq/signup/signup_view.dart';
 import 'package:cladiaq/widgets/cq_button.dart';
 import 'package:cladiaq/widgets/cq_input_field.dart';
 import 'package:cladiaq/widgets/cq_text.dart';
@@ -92,10 +93,17 @@ class _LogInViewState extends State<LogInView> {
                       ],
                     ),
                     Row(
-                      children: const [
-                        CqText.caption("Don't have an accounty?"),
+                      children: [
+                        const CqText.caption("Don't have an accounty?"),
                         horizontalSpaceTiny,
-                        CqText.caption("SignUp")
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) => const SignUp())));
+                            },
+                            child: CqText.caption("SignUp"))
                       ],
                     )
                   ],
