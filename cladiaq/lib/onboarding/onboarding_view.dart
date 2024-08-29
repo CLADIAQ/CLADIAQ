@@ -1,3 +1,4 @@
+import 'package:cladiaq/login/login_view.dart';
 import 'package:cladiaq/onboarding/onboarding_items.dart';
 import 'package:cladiaq/welcome/welcome.dart';
 import 'package:cladiaq/widgets/cq_button.dart';
@@ -110,10 +111,8 @@ class _OnboardingViewState extends State<OnboardingView> {
               final prefs = await SharedPreferences.getInstance();
               prefs.setBool("onboarding", true);
               if (!mounted) return;
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const WelcomePage())));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: ((context) => const LogInView())));
             },
           ),
         ));

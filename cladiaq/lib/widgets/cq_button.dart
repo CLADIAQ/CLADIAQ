@@ -1,5 +1,6 @@
 import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/styles.dart';
+import 'package:cladiaq/commons/ui_helpers.dart';
 import 'package:cladiaq/widgets/cq_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class CqButton extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 350),
         width: double.infinity,
-        height: 48,
+        height: 58,
         alignment: Alignment.center,
         decoration: !outline
             ? BoxDecoration(
@@ -47,10 +48,7 @@ class CqButton extends StatelessWidget {
                   Container(
                     child: leading != null ? leading! : null,
                   ),
-                  if (leading != null)
-                    const SizedBox(
-                      width: 5,
-                    ),
+                  if (leading != null) horizontalSpaceMedium,
                   Text(
                     title,
                     style: bodyStyle.copyWith(

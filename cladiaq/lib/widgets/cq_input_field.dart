@@ -25,7 +25,7 @@ class CqInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      style: const TextStyle(height: 1),
+      style: const TextStyle(height: 1.5),
       obscureText: password,
       decoration: InputDecoration(
           hintText: placeholder,
