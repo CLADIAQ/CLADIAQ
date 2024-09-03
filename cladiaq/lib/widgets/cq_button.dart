@@ -35,7 +35,13 @@ class CqButton extends StatelessWidget {
             ? BoxDecoration(
                 color: !disabled ? cqPrimaryColor : cqMediumGreyColor,
                 borderRadius: BorderRadius.circular(8),
-                // boxShadow: BoxShadow(),
+                // boxShadow: [
+                //   BoxShadow(
+                //       color: Colors.grey.shade600,
+                //       spreadRadius: 1,
+                //       blurRadius: 15,
+                //       offset: const Offset(0, 15))
+                // ],
                 border: Border.all(
                     color: !disabled ? cqPrimaryColor : cqMediumGreyColor))
             : BoxDecoration(

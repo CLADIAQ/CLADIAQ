@@ -157,9 +157,9 @@ class _WelcomePageState extends State<WelcomePage> {
   List<Widget> get inputFields => [
         verticalSpaceLarge,
         CqInputField(
-            trailingTapped: () {
-              print("I have been clicked");
-            },
+            // trailingTapped: () {
+            //   print("I have been clicked");
+            // },
             leading: Icon(Icons.email),
             trailing: Icon(
               Icons.remove_red_eye,

@@ -1,50 +1,75 @@
 import 'package:cladiaq/commons/colors.dart';
 import 'package:flutter/material.dart';
 
-class CqInputField extends StatelessWidget {
+class CqInputField extends StatefulWidget {
   final TextEditingController controller;
   final String placeholder;
   final Widget? leading;
   final Widget? trailing;
-  final void Function()? trailingTapped;
   final bool password;
+
+  CqInputField({
+    Key? key,
+    required this.controller,
+    this.placeholder = '',
+    this.password = false,
+    this.leading,
+    this.trailing,
+  }) : super(key: key);
+
+  @override
+  State<CqInputField> createState() => _CqInputFieldState();
+}
+
+class _CqInputFieldState extends State<CqInputField> {
   final circularBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(8),
   );
-  CqInputField(
-      {Key? key,
-      required this.controller,
-      this.placeholder = '',
-      this.password = false,
-      this.leading,
-      this.trailing,
-      this.trailingTapped})
-      : super(key: key);
+
+  late bool _isObscured;
+
+  @override
+  void initState() {
+    super.initState();
+    _isObscured = widget.password; // Initialize here
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _isObscured = !_isObscured;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
+      controller: widget.controller,
       style: const TextStyle(height: 1.5),
-      obscureText: password,
+      obscureText: _isObscured, // Use the state variable here
       decoration: InputDecoration(
-          hintText: placeholder,
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          filled: true,
-          prefixIcon: leading,
-          suffixIcon: trailing != null
-              ? GestureDetector(onTap: trailingTapped, child: trailing)
-              : null,
-          fillColor: cqVeryLightGreyColor,
-          border: circularBorder.copyWith(
-              borderSide: const BorderSide(color: cqLightGreyColor)),
-          errorBorder: circularBorder.copyWith(
-              borderSide: const BorderSide(color: cqDanger)),
-          focusedBorder: circularBorder.copyWith(
-              borderSide: const BorderSide(color: cqMediumGreyColor)),
-          enabledBorder: circularBorder.copyWith(
-              borderSide: const BorderSide(color: cqLightGreyColor))),
+        hintText: widget.placeholder,
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        filled: true,
+        prefixIcon: widget.leading,
+        suffixIcon: widget.password // Show toggle only for password field
+            ? GestureDetector(
+                onTap: _togglePasswordVisibility,
+                child: Icon(
+                  _isObscured ? Icons.visibility : Icons.visibility_off,
+                ),
+              )
+            : widget.trailing,
+        fillColor: cqVeryLightGreyColor,
+        border: circularBorder.copyWith(
+            borderSide: const BorderSide(color: cqLightGreyColor)),
+        errorBorder: circularBorder.copyWith(
+            borderSide: const BorderSide(color: cqDanger)),
+        focusedBorder: circularBorder.copyWith(
+            borderSide: const BorderSide(color: cqMediumGreyColor)),
+        enabledBorder: circularBorder.copyWith(
+            borderSide: const BorderSide(color: cqLightGreyColor)),
+      ),
     );
   }
 }

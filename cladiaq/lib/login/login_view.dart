@@ -6,14 +6,14 @@ import 'package:cladiaq/widgets/cq_input_field.dart';
 import 'package:cladiaq/widgets/cq_text.dart';
 import 'package:flutter/material.dart';
 
-class LogInView extends StatefulWidget {
-  const LogInView({Key? key}) : super(key: key);
+class LogIn extends StatefulWidget {
+  const LogIn({Key? key}) : super(key: key);
 
   @override
-  State<LogInView> createState() => _LogInViewState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _LogInViewState extends State<LogInView> {
+class _LogInState extends State<LogIn> {
   bool toggleValue = false;
   @override
   Widget build(BuildContext context) {
@@ -92,20 +92,7 @@ class _LogInViewState extends State<LogInView> {
                         const CqText.caption("Remember Me")
                       ],
                     ),
-                    Row(
-                      children: [
-                        const CqText.caption("Don't have an accounty?"),
-                        horizontalSpaceTiny,
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) => const SignUp())));
-                            },
-                            child: CqText.caption("SignUp"))
-                      ],
-                    )
+                    const CqText.caption("Forgot Password?"),
                   ],
                 )),
             verticalSpaceSmall,
@@ -139,14 +126,22 @@ class _LogInViewState extends State<LogInView> {
               width: screenWidth(context) * 0.75,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("Dont have an Account?"),
+                children: [
+                  const Text("Dont have an Account?"),
                   horizontalSpaceSmall,
-                  Text(
-                    "Sign up",
-                    style: TextStyle(
-                        color: cqPrimaryColor,
-                        decoration: TextDecoration.underline),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => const SignUp())));
+                    },
+                    child: const Text(
+                      "Sign up",
+                      style: TextStyle(
+                          color: cqPrimaryColor,
+                          decoration: TextDecoration.underline),
+                    ),
                   )
                 ],
               ),

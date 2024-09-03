@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               primary: cqFocusColor,
             ),
       ),
-      home: onboarding ? const LogInView() : const OnboardingView(),
+      home: onboarding ? const OnboardingView() : const LogIn(),
     );
   }
 }

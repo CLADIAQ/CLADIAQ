@@ -29,12 +29,10 @@ class _OnboardingViewState extends State<OnboardingView> {
                 title: "Get Started",
                 onPressedCq: () async {
                   final prefs = await SharedPreferences.getInstance();
-                  prefs.setBool("onboarding", true);
+                  prefs.setBool("onboarding", false);
                   if (!mounted) return;
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const WelcomePage())));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: ((context) => const LogIn())));
                 },
               )
             : Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -95,26 +93,5 @@ class _OnboardingViewState extends State<OnboardingView> {
             }),
       ),
     );
-  }
-
-  Widget getStarted(context) {
-    return Container(
-        decoration: const BoxDecoration(
-            color: Color(0xff56ADF0),
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        width: MediaQuery.of(context).size.width * .95,
-        height: 50,
-        child: Center(
-          child: CqButton(
-            title: "Get Started",
-            onPressedCq: () async {
-              final prefs = await SharedPreferences.getInstance();
-              prefs.setBool("onboarding", true);
-              if (!mounted) return;
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: ((context) => const LogInView())));
-            },
-          ),
-        ));
   }
 }
