@@ -18,17 +18,19 @@ class CqToogleButton extends StatelessWidget {
         duration: const Duration(milliseconds: 100),
         curve: Curves.easeIn,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0), color: cqLightGreyColor),
+            borderRadius: BorderRadius.circular(20.0),
+            color: toggleValue ? cqLightGreyColor : cqPrimaryColor),
         child: Stack(children: [
           Positioned(
-            left: toggleValue ? 0 : null,
-            right: toggleValue ? null : 0,
+            left: toggleValue ? 1 : null,
+            right: toggleValue ? null : 1,
+            top: 2,
             child: Container(
-              height: 20,
-              width: 20,
+              height: 15,
+              width: 15,
               decoration: BoxDecoration(
-                  color: toggleValue ? Colors.white : cqPrimaryColor,
-                  borderRadius: BorderRadius.circular(10)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(7.5)),
             ),
           )
         ]),

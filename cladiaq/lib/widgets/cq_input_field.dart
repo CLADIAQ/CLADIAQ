@@ -52,6 +52,7 @@ class _CqInputFieldState extends State<CqInputField> {
             numberOfFields: 4,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             borderColor: Colors.black,
+            focusedBorderColor: cqMediumGreyColor,
             //set to true to show as box or false to show as dash
             showFieldAsBox: true,
             //runs when a code is typed in
