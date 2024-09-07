@@ -83,6 +83,7 @@ class _SignUpState extends State<SignUp> {
             child: SizedBox(
               width: screenWidth(context) * 0.9,
               child: CqInputField(
+                otp: true,
                 password: true,
                 controller: TextEditingController(),
                 leading: Image.asset("assets/icons/lock.png"),

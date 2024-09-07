@@ -4,6 +4,7 @@ import 'package:cladiaq/signup/signup_view.dart';
 import 'package:cladiaq/widgets/cq_button.dart';
 import 'package:cladiaq/widgets/cq_input_field.dart';
 import 'package:cladiaq/widgets/cq_text.dart';
+import 'package:cladiaq/widgets/cq_toogle_button.dart';
 import 'package:flutter/material.dart';
 
 class LogIn extends StatefulWidget {
@@ -61,32 +62,13 @@ class _LogInState extends State<LogIn> {
                   children: [
                     Row(
                       children: [
-                        InkWell(
-                          onTap: toggleButton,
-                          child: AnimatedContainer(
-                            height: 40.0,
-                            width: 35,
-                            duration: const Duration(milliseconds: 100),
-                            curve: Curves.easeIn,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20.0),
-                                color: cqLightGreyColor),
-                            child: Stack(children: [
-                              Positioned(
-                                left: toggleValue ? 0 : null,
-                                right: toggleValue ? null : 0,
-                                child: Container(
-                                  height: 20,
-                                  width: 20,
-                                  decoration: BoxDecoration(
-                                      color: toggleValue
-                                          ? Colors.white
-                                          : cqPrimaryColor,
-                                      borderRadius: BorderRadius.circular(10)),
-                                ),
-                              )
-                            ]),
-                          ),
+                        CqToogleButton(
+                          toggleFunct: () {
+                            setState(() {
+                              toggleValue = !toggleValue;
+                            });
+                          },
+                          toggleValue: toggleValue,
                         ),
                         horizontalSpaceSmall,
                         const CqText.caption("Remember Me")
@@ -150,11 +132,5 @@ class _LogInState extends State<LogIn> {
         )),
       ),
     );
-  }
-
-  toggleButton() {
-    setState(() {
-      toggleValue = !toggleValue;
-    });
   }
 }
