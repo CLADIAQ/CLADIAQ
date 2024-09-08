@@ -7,12 +7,12 @@ const TextStyle heading1Style = TextStyle(
 
 const TextStyle heading2Style = TextStyle(
   fontSize: 28,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w500,
 );
 
 const TextStyle heading3Style = TextStyle(
   fontSize: 24,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w500,
 );
 
 const TextStyle headlineStyle = TextStyle(
