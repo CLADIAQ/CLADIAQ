@@ -1,5 +1,6 @@
 import 'package:cladiaq/commons/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CqButtomnNavBar extends StatelessWidget {
   const CqButtomnNavBar({super.key});
@@ -23,27 +24,20 @@ class CqButtomnNavBar extends StatelessWidget {
                   //     VehiclePage.route(), (route) => route.isFirst);
                   // Navigator.of(context).push(VehiclePage.route());
                 },
-                icon: const Icon(Icons.home, color: cqMediumGreyColor),
+                icon: SvgPicture.asset(
+                  "assets/icons/cq_home.svg",
+                  color: cqMediumGreyColor,
+                  height: 20,
+                  width: 20,
+                ),
                 // Image.asset(
                 //   'assets/icons/vehicles.png',
                 //   height: 28,
                 //   width: 28,
                 // ),
-                label: 'vehicles',
+                label: 'Home',
               ),
-              _BottomBarItem(
-                onTap: () {
-                  // Navigator.of(context).pop();
-                  // Navigator.of(context)
-                  //     .pushAndRemoveUntil(HomePage.route(), (route) => false);
-                  // Navigator.of(context).pushReplacement(HomePage.route());
-                },
-                icon: const Icon(
-                  Icons.home,
-                  color: cqMediumGreyColor,
-                ),
-                label: 'dashboard',
-              ),
+
               /* 
               _BottomBarItem(
                 onTap: () {
@@ -57,17 +51,42 @@ class CqButtomnNavBar extends StatelessWidget {
                 label: 'Drivers',
               ), */
               _BottomBarItem(
-                icon: const Icon(
-                  Icons.group,
+                icon: SvgPicture.asset(
+                  "assets/icons/cq_news.svg",
                   color: cqMediumGreyColor,
-                  size: 28,
+                  height: 20,
+                  width: 20,
                 ),
                 onTap: () {
                   // Navigator.of(context).pushAndRemoveUntil(
                   //     UsersPage.route(), (route) => route.isFirst);
                   // Navigator.of(context).push(UsersPage.route());
                 },
-                label: 'users',
+                label: 'News',
+              ),
+              _BottomBarItem(
+                onTap: () {},
+                icon: SvgPicture.asset(
+                  "assets/icons/cq_ai.svg",
+                  color: cqMediumGreyColor,
+                  height: 20,
+                  width: 20,
+                ),
+                label: 'CLADIAQ AI',
+              ),
+              _BottomBarItem(
+                icon: SvgPicture.asset(
+                  "assets/icons/cq_settings.svg",
+                  color: cqMediumGreyColor,
+                  height: 20,
+                  width: 20,
+                ),
+                onTap: () {
+                  // Navigator.of(context).pushAndRemoveUntil(
+                  //     UsersPage.route(), (route) => route.isFirst);
+                  // Navigator.of(context).push(UsersPage.route());
+                },
+                label: 'Settings',
               ),
             ],
           ),
@@ -104,7 +123,7 @@ class _BottomBarItem extends StatelessWidget {
                 this.label,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: cqMediumGreyColor,
                   fontSize: 11,
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/ui_helpers.dart';
-import 'package:cladiaq/forgot_password/create_new_password.dart';
+import 'package:cladiaq/home/home_view.dart';
 import 'package:cladiaq/signup/signup_view.dart';
 import 'package:cladiaq/commons/widgets/cq_button.dart';
 import 'package:cladiaq/commons/widgets/cq_input_field.dart';
@@ -87,8 +87,7 @@ class _LogInState extends State<LogIn> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) =>
-                                  const ForgotPasswordEmail())));
+                              builder: ((context) => const HomePage())));
                     })),
             verticalSpaceSmall,
             const CqText.heading3("Or"),
