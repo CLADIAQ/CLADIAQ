@@ -2,10 +2,10 @@ import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/ui_helpers.dart';
 import 'package:cladiaq/forgot_password/create_new_password.dart';
 import 'package:cladiaq/signup/signup_view.dart';
-import 'package:cladiaq/widgets/cq_button.dart';
-import 'package:cladiaq/widgets/cq_input_field.dart';
-import 'package:cladiaq/widgets/cq_text.dart';
-import 'package:cladiaq/widgets/cq_toogle_button.dart';
+import 'package:cladiaq/commons/widgets/cq_button.dart';
+import 'package:cladiaq/commons/widgets/cq_input_field.dart';
+import 'package:cladiaq/commons/widgets/cq_text.dart';
+import 'package:cladiaq/commons/widgets/cq_toogle_button.dart';
 import 'package:flutter/material.dart';
 
 class LogIn extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/ui_helpers.dart';
 import 'package:cladiaq/login/login_view.dart';
-import 'package:cladiaq/widgets/cq_button.dart';
-import 'package:cladiaq/widgets/cq_input_field.dart';
-import 'package:cladiaq/widgets/cq_text.dart';
+import 'package:cladiaq/commons/widgets/cq_button.dart';
+import 'package:cladiaq/commons/widgets/cq_input_field.dart';
+import 'package:cladiaq/commons/widgets/cq_text.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {

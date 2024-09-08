@@ -1,6 +1,6 @@
 import 'package:cladiaq/login/login_view.dart';
 import 'package:cladiaq/onboarding/onboarding_items.dart';
-import 'package:cladiaq/widgets/cq_button.dart';
+import 'package:cladiaq/commons/widgets/cq_button.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';

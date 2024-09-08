@@ -1,8 +1,8 @@
 import 'package:cladiaq/commons/ui_helpers.dart';
 import 'package:cladiaq/forgot_password/views/otp_verification_view.dart';
-import 'package:cladiaq/widgets/cq_button.dart';
-import 'package:cladiaq/widgets/cq_input_field.dart';
-import 'package:cladiaq/widgets/cq_text.dart';
+import 'package:cladiaq/commons/widgets/cq_button.dart';
+import 'package:cladiaq/commons/widgets/cq_input_field.dart';
+import 'package:cladiaq/commons/widgets/cq_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
