@@ -1,3 +1,4 @@
+import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/widgets/cq_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -48,7 +49,7 @@ class CqAppBar extends StatelessWidget implements PreferredSizeWidget {
                     width: 13,
                     height: 13,
                     decoration: const BoxDecoration(
-                      color: Color(0xffEF6497),
+                      color: cqNotification,
                       shape: BoxShape.circle,
                     ),
                   ),

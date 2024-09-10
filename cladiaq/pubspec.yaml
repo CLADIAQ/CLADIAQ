@@ -36,6 +36,7 @@ dependencies:
   bloc: ^8.1.4
   flutter_otp_text_field: ^1.2.0
   flutter_svg: ^2.0.10+1
+  web_socket_channel: ^3.0.1
   
 
 dev_dependencies:
@@ -70,9 +71,18 @@ flutter:
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
 flutter_native_splash:
+  android: true
+  ios: true
+  web: true
   color: "#E4EDFF"
   image: assets/images/logo.png
   branding: assets/images/branding.png
+
+  android_12:
+    color: "#E4EDFF"
+    image: assets/images/logo.png
+    branding: assets/images/branding.png
+
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
