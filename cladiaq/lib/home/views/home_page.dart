@@ -1,5 +1,7 @@
+import 'package:cladiaq/commons/ui_helpers.dart';
 import 'package:cladiaq/commons/widgets/cq_app_bar.dart';
 import 'package:cladiaq/commons/widgets/cq_buttomn_nav_bar.dart';
+import 'package:cladiaq/commons/widgets/cq_profile_img.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,7 +21,7 @@ class _HomePageState extends State<HomePage> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text("Home Screen")],
+            children: [verticalSpaceLarge, CqProfileImg(), Text("Home Screen")],
           ),
         ),
       ),
