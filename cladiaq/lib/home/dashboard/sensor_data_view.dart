@@ -11,24 +11,36 @@ class SensorDataPage extends StatefulWidget {
 
 class _SensorDataPageState extends State<SensorDataPage> {
   final WebSocketChannel channel =
-      IOWebSocketChannel.connect('ws://10.0.2.2:8000/ws/sensor-data/');
-  String? temperature = "No data";
+      IOWebSocketChannel.connect('ws://13.61.33.10:8000/ws/sensor-data/');
+  String temperature = "No data"; // Changed to non-nullable String
 
   @override
   void initState() {
-    print("I am in");
     super.initState();
     channel.stream.listen((data) {
       final jsonData = json.decode(data);
-      print(data);
-      // Decode the incoming JSON data
-      setState(() {
-        temperature = jsonData['temperature']; // Update the temperature value
-      });
+      print(jsonData);
+
+      // Check if the temperature field exists and is not null
+      if (jsonData['sensor_data']['temperature'] != null) {
+        setState(() {
+          temperature = jsonData['sensor_data']['temperature'].toString();
+          print("I am not null");
+          print(temperature);
+          print("I am not null");
+          // Convert to String for display
+        });
+      } else {
+        print(" I am null");
+        print(" I am null");
+        print(" I am null");
+        print(" I am null");
+        print(" I am null");
+      }
     }, onDone: () {
-      debugPrint("ws was closed");
+      debugPrint("WebSocket was closed");
     }, onError: (error) {
-      debugPrint(error);
+      debugPrint(error.toString());
     });
   }
 

@@ -64,9 +64,8 @@ class _CqInputFieldState extends State<CqInputField> {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return AlertDialog(
-                      title: Text("Verification Code"),
-                      content: Text('Code entered is $verificationCode'),
+                    return Center(
+                      child: Text("Verification Code"),
                     );
                   });
             }, // end onSubmit

@@ -1,5 +1,4 @@
 import 'package:cladiaq/commons/colors.dart';
-import 'package:cladiaq/home/dashboard/sensor_data_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -39,13 +38,16 @@ class CqButtomnNavBar extends StatelessWidget {
               // Navigator.of(context).pushAndRemoveUntil(
               //     UsersPage.route(), (route) => route.isFirst);
               // Navigator.of(context).push(UsersPage.route());
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SensorDataPage()));
+              Navigator.of(context).pushNamed('/news');
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => SensorDataPage()));
             },
             label: 'News',
           ),
           _BottomBarItem(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/dashboard');
+            },
             icon: SvgPicture.asset(
               "assets/icons/cq_ai.svg",
               color: cqMediumGreyColor,

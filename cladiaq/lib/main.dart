@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cladiaq/commons/colors.dart';
+import 'package:cladiaq/home/home_view.dart';
 import 'package:cladiaq/login/login_view.dart';
 import 'package:cladiaq/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,11 @@ class MyApp extends StatelessWidget {
               primary: cqPrimaryColor,
             ),
       ),
-      home: onboarding ? const OnboardingView() : const LogIn(),
+      routes: {
+        "/": (context) => onboarding ? const OnboardingView() : const LogIn(),
+        "/dashboard": (context) => const LogIn(),
+        "/news": (context) => SensorDataPage(),
+      },
     );
   }
 }

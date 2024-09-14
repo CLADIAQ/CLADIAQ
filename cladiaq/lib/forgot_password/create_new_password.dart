@@ -16,8 +16,8 @@ class ForgotPasswordEmail extends StatelessWidget {
         body: Stack(
           children: [
             Container(
-              padding: const EdgeInsets.all(8.0),
-              margin: const EdgeInsets.all(8),
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -46,8 +46,8 @@ class ForgotPasswordEmail extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 5,
-              left: 5,
+              top: 10,
+              left: 15,
               child: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
