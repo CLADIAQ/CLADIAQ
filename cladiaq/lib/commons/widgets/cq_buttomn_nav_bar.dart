@@ -8,13 +8,16 @@ class CqButtomnNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      height: 70,
+      notchMargin: 1,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           _BottomBarItem(
             onTap: () {
+              Navigator.of(context).pushNamed("/dashboard");
               // Navigator.of(context).pushAndRemoveUntil(
               //     VehiclePage.route(), (route) => route.isFirst);
               // Navigator.of(context).push(VehiclePage.route());
@@ -67,6 +70,7 @@ class CqButtomnNavBar extends StatelessWidget {
               // Navigator.of(context).pushAndRemoveUntil(
               //     UsersPage.route(), (route) => route.isFirst);
               // Navigator.of(context).push(UsersPage.route());
+              Navigator.of(context).pushNamed('/settings');
             },
             label: 'Settings',
           ),
@@ -78,10 +82,9 @@ class CqButtomnNavBar extends StatelessWidget {
 
 class _BottomBarItem extends StatelessWidget {
   final GestureTapCallback? onTap;
-
   final String label;
-
   final Widget icon;
+
   const _BottomBarItem({
     Key? key,
     this.onTap,
@@ -91,24 +94,25 @@ class _BottomBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.only(top: 2),
-          child: Column(
-            children: [
-              this.icon,
-              Text(
-                this.label,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: cqMediumGreyColor,
-                  fontSize: 11,
-                ),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 50, // Set a specific height
+        alignment: Alignment.center, // Center content vertically
+        child: Column(
+          mainAxisAlignment:
+              MainAxisAlignment.center, // Center items vertically
+          children: [
+            this.icon,
+            Text(
+              this.label,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: cqMediumGreyColor,
+                fontSize: 11,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

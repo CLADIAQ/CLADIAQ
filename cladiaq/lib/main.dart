@@ -4,6 +4,8 @@ import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/home/home_view.dart';
 import 'package:cladiaq/login/login_view.dart';
 import 'package:cladiaq/onboarding/onboarding_view.dart';
+import 'package:cladiaq/settings/settings_page.dart';
+import 'package:cladiaq/settings/settings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,8 +36,10 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "/": (context) => onboarding ? const OnboardingView() : const LogIn(),
-        "/dashboard": (context) => const LogIn(),
+        "/dashboard": (context) => const HomePage(),
         "/news": (context) => SensorDataPage(),
+        "/ai": (context) => SensorDataPage(),
+        "/settings": (context) => const SettingsPage(),
       },
     );
   }
