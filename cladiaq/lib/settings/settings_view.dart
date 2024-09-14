@@ -1,4 +1,3 @@
-import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/ui_helpers.dart';
 import 'package:cladiaq/settings/settings_list.dart';
 import 'package:flutter/material.dart';
