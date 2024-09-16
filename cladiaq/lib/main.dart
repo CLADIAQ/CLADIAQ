@@ -1,12 +1,16 @@
 import 'dart:developer';
 
 import 'package:cladiaq/commons/colors.dart';
+import 'package:cladiaq/commons/data/services/authentication_service.dart';
+import 'package:cladiaq/commons/repository/user_repository.dart';
 import 'package:cladiaq/home/home_view.dart';
+import 'package:cladiaq/login/bloc/login_bloc.dart';
 import 'package:cladiaq/login/login_view.dart';
 import 'package:cladiaq/onboarding/onboarding_view.dart';
 import 'package:cladiaq/settings/settings_page.dart';
-import 'package:cladiaq/settings/settings_view.dart';
+import 'package:cladiaq/signup/bloc/registration_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -26,21 +30,34 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ThemeData().colorScheme.copyWith(
-              primary: cqPrimaryColor,
-            ),
+    UserRepository userRepository = UserRepository();
+    AuthenticationService authenticationService =
+        AuthenticationService(userRepository);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LoginBloc(authenticationService),
+        ),
+        BlocProvider(
+          create: (context) => RegistrationBloc(authenticationService),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ThemeData().colorScheme.copyWith(
+                primary: cqPrimaryColor,
+              ),
+        ),
+        routes: {
+          "/": (context) => onboarding ? const OnboardingView() : const LogIn(),
+          "/dashboard": (context) => const HomePage(),
+          "/news": (context) => SensorDataPage(),
+          "/ai": (context) => SensorDataPage(),
+          "/settings": (context) => const SettingsPage()
+        },
       ),
-      routes: {
-        "/": (context) => onboarding ? const OnboardingView() : const LogIn(),
-        "/dashboard": (context) => const HomePage(),
-        "/news": (context) => SensorDataPage(),
-        "/ai": (context) => SensorDataPage(),
-        "/settings": (context) => const SettingsPage(),
-      },
     );
   }
 }

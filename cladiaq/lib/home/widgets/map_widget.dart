@@ -10,8 +10,8 @@ class MapWidget extends StatelessWidget {
       decoration: BoxDecoration(color: Colors.blue[100]),
       child: FlutterMap(
         options: MapOptions(
-          initialCenter: LatLng(51.5, -0.09),
-          initialZoom: 13.0,
+          initialCenter: LatLng(12.2472, 7.3442),
+          initialZoom: 20,
         ),
         children: [
           TileLayer(

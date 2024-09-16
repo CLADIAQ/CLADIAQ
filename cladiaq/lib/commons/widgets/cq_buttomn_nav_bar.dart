@@ -7,9 +7,9 @@ class CqButtomnNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      notchMargin: 1,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
+    return Container(
+      height: 40,
+      width: 300,
       color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
