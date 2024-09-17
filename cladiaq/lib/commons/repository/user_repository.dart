@@ -5,7 +5,8 @@ import 'dart:convert';
 
 class UserRepository {
   final FlutterSecureStorage _storage = FlutterSecureStorage();
-  final String _baseUrl = 'http://13.61.33.10:8000/api';
+  // final String _baseUrl = 'http://13.61.33.10:8000/api';
+  final String _baseUrl = 'http://10.0.2.2:8000/api';
 
   Future<void> login(String email, String password) async {
     final response = await http.post(
@@ -19,6 +20,7 @@ class UserRepository {
       final token = data['token'];
       // Store the token securely
       await _storage.write(key: 'auth_token', value: token);
+      return data;
     } else {
       throw Exception('Failed to login');
     }
@@ -34,6 +36,9 @@ class UserRepository {
 
     if (response.statusCode != 201) {
       throw Exception('Failed to register');
+    } else {
+      print(response.body);
+      return jsonDecode(response.body);
     }
   }
 
@@ -43,6 +48,8 @@ class UserRepository {
   }
 
   Future<String?> getToken() async {
-    return await _storage.read(key: 'auth_token');
+    final b = await _storage.read(key: 'auth_token');
+    print(b.toString());
+    return b;
   }
 }

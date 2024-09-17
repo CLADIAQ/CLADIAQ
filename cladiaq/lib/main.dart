@@ -3,6 +3,9 @@ import 'dart:developer';
 import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/data/services/authentication_service.dart';
 import 'package:cladiaq/commons/repository/user_repository.dart';
+import 'package:cladiaq/device_data/bloc/device_data_bloc.dart';
+import 'package:cladiaq/device_data/device_data_view.dart';
+import 'package:cladiaq/device_data/services/device_data_service.dart';
 import 'package:cladiaq/home/home_view.dart';
 import 'package:cladiaq/login/bloc/login_bloc.dart';
 import 'package:cladiaq/login/login_view.dart';
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
     UserRepository userRepository = UserRepository();
     AuthenticationService authenticationService =
         AuthenticationService(userRepository);
+    DeviceDataService deviceDataService = DeviceDataService();
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -41,6 +45,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => RegistrationBloc(authenticationService),
         ),
+        BlocProvider(create: (context) => DeviceDataBloc(deviceDataService))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -51,8 +56,10 @@ class MyApp extends StatelessWidget {
               ),
         ),
         routes: {
-          "/": (context) => onboarding ? const OnboardingView() : const LogIn(),
+          "/": (context) =>
+              onboarding ? const OnboardingView() : const HomeView(),
           "/dashboard": (context) => const HomePage(),
+          "/login": (context) => const LogIn(),
           "/news": (context) => SensorDataPage(),
           "/ai": (context) => SensorDataPage(),
           "/settings": (context) => const SettingsPage()

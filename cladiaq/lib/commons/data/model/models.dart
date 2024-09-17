@@ -87,23 +87,32 @@ class Organization {
 
 // CustomUser Model
 class CustomUser {
+  final int id;
   final String username;
+  final String? message;
+  final String? email;
   final String? address;
   final String? tellNum;
   final Profile? profile;
 
   CustomUser({
     required this.username,
+    required this.id,
+    this.email,
     this.address,
     this.tellNum,
     this.profile,
+    this.message,
   });
 
   factory CustomUser.fromJson(Map<String, dynamic> json) {
     return CustomUser(
+      id: json['id'],
       username: json['username'],
+      email: json['email'],
       address: json['address'],
       tellNum: json['tell_num'],
+      message: json['message'],
       profile:
           json['profile'] != null ? Profile.fromJson(json['profile']) : null,
     );
@@ -111,9 +120,12 @@ class CustomUser {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'username': username,
+      'email': email,
       'address': address,
       'tell_num': tellNum,
+      'message': message,
       'profile': profile?.toJson(),
     };
   }

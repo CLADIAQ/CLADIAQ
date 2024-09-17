@@ -39,6 +39,7 @@ class _SignUpState extends State<SignUp> {
           child: BlocListener<RegistrationBloc, RegistrationState>(
             listener: (context, state) {
               if (state is RegistrationSuccess) {
+                Navigator.pushReplacementNamed(context, '/login');
                 // Navigate to the home screen or show success message
               } else if (state is RegistrationFailure) {
                 // Show error message
@@ -170,36 +171,59 @@ class _SignUpState extends State<SignUp> {
                 verticalSpaceTiny,
                 SizedBox(
                   width: screenWidth(context) * 0.4,
-                  child: CqButton(
-                    title: "Sign up",
-                    onPressedCq: () {
-                      final fullName = fullNameController.text;
-                      final email = emailController.text;
-                      final mobile = mobileController.text;
-                      final password = passwordController.text;
+                  child: BlocBuilder<RegistrationBloc, RegistrationState>(
+                    builder: (context, state) {
+                      return CqButton(
+                        busy: (state is RegistrationLoading),
+                        title: "Sign up",
+                        onPressedCq: () {
+                          final fullName = fullNameController.text;
+                          final email = emailController.text;
+                          final mobile = mobileController.text;
+                          final password = passwordController.text;
 
-                      if (checkbox) {
-                        context.read<RegistrationBloc>().add(
-                              RegistrationButtonPressed(
-                                fullName: fullName,
-                                email: email,
-                                mobile: mobile,
-                                password: password,
-                              ),
-                            );
-                      } else {
-                        // Show an error message if the checkbox is not checked
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                                "Please agree to the terms and conditions")));
-                      }
+                          if (checkbox) {
+                            context.read<RegistrationBloc>().add(
+                                  RegistrationButtonPressed(
+                                    fullName: fullName,
+                                    email: email,
+                                    mobile: mobile,
+                                    password: password,
+                                  ),
+                                );
+                          } else {
+                            // Show an error message if the checkbox is not checked
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    "Please agree to the terms and conditions")));
+                          }
+                        },
+                      );
                     },
                   ),
                 ),
                 verticalSpaceSmall,
                 const CqText.heading3("Or"),
                 verticalSpaceSmall,
-                // Your existing Google and Facebook buttons go here
+                SizedBox(
+                  width: screenWidth(context) * 0.75,
+                  child: CqButton(
+                    leading: Image.asset('assets/icons/google.png'),
+                    title: "Login With Google",
+                    onPressedCq: () {},
+                    outline: true,
+                  ),
+                ),
+                verticalSpaceSmall,
+                SizedBox(
+                  width: screenWidth(context) * 0.75,
+                  child: CqButton(
+                    title: "Login With Facebook",
+                    onPressedCq: () {},
+                    outline: true,
+                    leading: Image.asset('assets/icons/facebook.png'),
+                  ),
+                ),
                 verticalSpaceTiny,
                 SizedBox(
                   width: screenWidth(context) * 0.75,

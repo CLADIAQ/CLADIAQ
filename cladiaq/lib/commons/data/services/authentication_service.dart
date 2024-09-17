@@ -5,9 +5,9 @@ class AuthenticationService {
 
   AuthenticationService(this.userRepository);
 
-  Future<void> login(String email, String password) async {
+  Future login(String email, String password) async {
     try {
-      await userRepository.login(email, password);
+      return await userRepository.login(email, password);
 
       // Optionally, you can perform any additional logic after a successful login
     } catch (e) {
@@ -17,9 +17,9 @@ class AuthenticationService {
     }
   }
 
-  Future<void> register(String username, String email, String password) async {
+  Future register(String username, String email, String password) async {
     try {
-      await userRepository.register(username, email, password);
+      return await userRepository.register(username, email, password);
       // Optionally, you can perform actions after successful registration
     } catch (e) {
       // Handle registration errors

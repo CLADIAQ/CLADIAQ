@@ -108,14 +108,19 @@ class _LogInState extends State<LogIn> {
                 verticalSpaceSmall,
                 SizedBox(
                   width: screenWidth(context) * 0.4,
-                  child: CqButton(
-                    title: "Login",
-                    onPressedCq: () {
-                      final email = emailController.text;
-                      final password = passwordController.text;
+                  child: BlocBuilder<LoginBloc, LoginState>(
+                    builder: (contexte, state) {
+                      return CqButton(
+                        busy: (state is LoginLoading),
+                        title: "Login",
+                        onPressedCq: () {
+                          final email = emailController.text;
+                          final password = passwordController.text;
 
-                      context.read<LoginBloc>().add(
-                          LoginButtonPressed(email: email, password: password));
+                          context.read<LoginBloc>().add(LoginButtonPressed(
+                              email: email, password: password));
+                        },
+                      );
                     },
                   ),
                 ),
@@ -126,7 +131,7 @@ class _LogInState extends State<LogIn> {
                   width: screenWidth(context) * 0.75,
                   child: CqButton(
                     leading: Image.asset('assets/icons/google.png'),
-                    title: "Login With Google",
+                    title: "Signup With Google",
                     onPressedCq: () {},
                     outline: true,
                   ),
@@ -135,7 +140,7 @@ class _LogInState extends State<LogIn> {
                 SizedBox(
                   width: screenWidth(context) * 0.75,
                   child: CqButton(
-                    title: "Login With Facebook",
+                    title: "Signup With Facebook",
                     onPressedCq: () {},
                     outline: true,
                     leading: Image.asset('assets/icons/facebook.png'),
