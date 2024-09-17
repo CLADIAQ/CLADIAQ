@@ -1,11 +1,14 @@
 import 'package:cladiaq/commons/ui_helpers.dart';
 import 'package:cladiaq/commons/widgets/cq_icon_button.dart';
+import 'package:cladiaq/device_data/bloc/device_data_bloc.dart';
+import 'package:cladiaq/device_data/bloc/device_data_state.dart';
 import 'package:flutter/material.dart';
 import 'package:cladiaq/commons/widgets/cq_app_bar.dart';
 import 'package:cladiaq/commons/widgets/cq_buttomn_nav_bar.dart';
 import 'package:cladiaq/home/widgets/bar_chart_widget.dart';
 import 'package:cladiaq/home/widgets/line_chart_widget.dart';
 import 'package:cladiaq/home/widgets/map_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.transparent, // Set the body color to transparent
             ),
             child: Center(
@@ -32,10 +35,6 @@ class _HomePageState extends State<HomePage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      MapWidget(),
-                      verticalSpaceSmall,
-                      LineChartWidget(),
-                      verticalSpaceSmall,
                       SizedBox(
                         height: 25,
                         width: 300,
@@ -50,7 +49,6 @@ class _HomePageState extends State<HomePage> {
                                 icon: "assets/icons/temperature.svg",
                                 onPressedCq: () {}),
                             CqIconButton(
-                                disabled: false,
                                 icon: "assets/icons/humidity.svg",
                                 onPressedCq: () {}),
                             CqIconButton(
@@ -77,7 +75,26 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       verticalSpaceSmall,
+                      BlocBuilder<DeviceDataBloc, DeviceDataState>(
+                        builder: (context, state) {
+                          if (state is DeviceDataLoaded) {
+                            // final List<double> temp = state.deviceData
+                            //     .map((data) => data.temperature!)
+                            //     .toList();
+                            // final List<String> time = state.deviceData
+                            //     .map((data) => data.deviceId.toString())
+                            //     .toList();
+                            return LineChartWidget(
+                              sensorDataList: state.deviceData,
+                            );
+                          } else
+                            return Container();
+                        },
+                      ),
+                      verticalSpaceSmall,
                       BarChartWidget(),
+                      verticalSpaceSmall,
+                      MapWidget(),
                     ],
                   ),
                 ),

@@ -17,7 +17,7 @@ class BarChartWidget extends StatelessWidget {
             BarChartGroupData(
                 x: 2, barRods: [BarChartRodData(toY: 4, color: Colors.blue)]),
           ],
-          titlesData: FlTitlesData(show: false),
+          titlesData: FlTitlesData(show: true),
         ),
       ),
     );

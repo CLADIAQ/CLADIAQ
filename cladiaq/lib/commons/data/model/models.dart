@@ -259,7 +259,7 @@ class Device {
 
 // SensorData Model
 class SensorData {
-  final Device deviceId;
+  final int deviceId;
   final double? temperature;
   final double? humidity;
   final double? atmPressure;
@@ -293,7 +293,8 @@ class SensorData {
 
   factory SensorData.fromJson(Map<String, dynamic> json) {
     return SensorData(
-      deviceId: Device.fromJson(json['device_id']),
+      deviceId: json['id'],
+      // deviceId: Device.fromJson(json['device_id']),
       temperature: json['temperature'],
       humidity: json['humidity'],
       atmPressure: json['atm_pressure'],
@@ -312,7 +313,7 @@ class SensorData {
 
   Map<String, dynamic> toJson() {
     return {
-      'device_id': deviceId.toJson(),
+      'device_id': deviceId,
       'temperature': temperature,
       'humidity': humidity,
       'atm_pressure': atmPressure,

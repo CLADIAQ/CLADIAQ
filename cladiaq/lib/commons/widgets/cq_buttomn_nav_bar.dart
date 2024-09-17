@@ -1,77 +1,85 @@
-import 'package:cladiaq/commons/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:cladiaq/commons/colors.dart';
 
-class CqButtomnNavBar extends StatelessWidget {
+class CqButtomnNavBar extends StatefulWidget {
   const CqButtomnNavBar({super.key});
+
+  @override
+  _CqButtomnNavBarState createState() => _CqButtomnNavBarState();
+}
+
+class _CqButtomnNavBarState extends State<CqButtomnNavBar> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    // Navigate to the respective page based on index
+    switch (index) {
+      case 0:
+        Navigator.of(context).pushNamed("/dashboard");
+        break;
+      case 1:
+        Navigator.of(context).pushNamed('/news');
+        break;
+      case 2:
+        Navigator.of(context).pushNamed('/ai');
+        break;
+      case 3:
+        Navigator.of(context).pushNamed('/settings');
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
-      width: 300,
+      height: 50,
       color: Colors.transparent,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           _BottomBarItem(
-            onTap: () {
-              Navigator.of(context).pushNamed("/dashboard");
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     VehiclePage.route(), (route) => route.isFirst);
-              // Navigator.of(context).push(VehiclePage.route());
-            },
+            onTap: () => _onItemTapped(0),
             icon: SvgPicture.asset(
               "assets/icons/cq_home.svg",
-              color: cqMediumGreyColor,
+              color: _selectedIndex == 0 ? Colors.blue : cqMediumGreyColor,
               height: 20,
               width: 20,
             ),
             label: 'Home',
           ),
           _BottomBarItem(
+            onTap: () => _onItemTapped(1),
             icon: SvgPicture.asset(
               "assets/icons/cq_news.svg",
-              color: cqMediumGreyColor,
+              color: _selectedIndex == 1 ? Colors.blue : cqMediumGreyColor,
               height: 20,
               width: 20,
             ),
-            onTap: () {
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     UsersPage.route(), (route) => route.isFirst);
-              // Navigator.of(context).push(UsersPage.route());
-              Navigator.of(context).pushNamed('/news');
-              // Navigator.push(context,
-              //     MaterialPageRoute(builder: (context) => SensorDataPage()));
-            },
             label: 'News',
           ),
           _BottomBarItem(
-            onTap: () {
-              Navigator.of(context).pushNamed('/dashboard');
-            },
+            onTap: () => _onItemTapped(2),
             icon: SvgPicture.asset(
               "assets/icons/cq_ai.svg",
-              color: cqMediumGreyColor,
+              color: _selectedIndex == 2 ? Colors.blue : cqMediumGreyColor,
               height: 20,
               width: 20,
             ),
             label: 'CLADIAQ AI',
           ),
           _BottomBarItem(
+            onTap: () => _onItemTapped(3),
             icon: SvgPicture.asset(
               "assets/icons/cq_settings.svg",
-              color: cqMediumGreyColor,
+              color: _selectedIndex == 3 ? Colors.blue : cqMediumGreyColor,
               height: 20,
               width: 20,
             ),
-            onTap: () {
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     UsersPage.route(), (route) => route.isFirst);
-              // Navigator.of(context).push(UsersPage.route());
-              Navigator.of(context).pushNamed('/settings');
-            },
             label: 'Settings',
           ),
         ],
@@ -97,11 +105,10 @@ class _BottomBarItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 50, // Set a specific height
-        alignment: Alignment.center, // Center content vertically
+        height: 50,
+        alignment: Alignment.center,
         child: Column(
-          mainAxisAlignment:
-              MainAxisAlignment.center, // Center items vertically
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             this.icon,
             Text(
