@@ -1,6 +1,7 @@
 // screens/login_view.dart
 import 'package:cladiaq/commons/data/services/authentication_service.dart';
 import 'package:cladiaq/commons/repository/user_repository.dart';
+import 'package:cladiaq/forgot_password/create_new_password.dart';
 import 'package:cladiaq/login/bloc/login_bloc.dart';
 import 'package:cladiaq/login/bloc/login_event.dart';
 import 'package:cladiaq/login/bloc/login_state.dart';
@@ -101,7 +102,12 @@ class _LogInState extends State<LogIn> {
                           const CqText.caption("Remember Me")
                         ],
                       ),
-                      const CqText.caption("Forgot Password?"),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ForgotPasswordEmail()));
+                          },
+                          child: const CqText.caption("Forgot Password?")),
                     ],
                   ),
                 ),

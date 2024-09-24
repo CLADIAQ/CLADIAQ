@@ -6,7 +6,6 @@ class BarChartWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height / 3,
-      decoration: BoxDecoration(color: Colors.blue[100]),
       child: BarChart(
         BarChartData(
           barGroups: [

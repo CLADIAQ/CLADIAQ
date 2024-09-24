@@ -6,7 +6,7 @@ class DeviceDataService {
   Future<List<dynamic>> fetchDeviceData(String token) async {
     print(token);
     final response = await http.get(
-      Uri.parse('http://10.0.2.2:8000/apid/sensor-data'),
+      Uri.parse('http://13.61.33.10:8000/api/sensor-data'),
       headers: {
         'Authorization': 'Token $token',
         'Content-Type': 'application/json', // Adjust if required

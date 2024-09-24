@@ -8,12 +8,14 @@ class CqButton extends StatelessWidget {
   final bool disabled;
   final bool busy;
   final bool outline;
+  final bool outlineblue;
   final Widget? leading;
   final VoidCallback onPressedCq;
   const CqButton(
       {Key? key,
       required this.title,
       required this.onPressedCq,
+      this.outlineblue = false,
       this.disabled = false,
       this.busy = false,
       this.outline = false,
@@ -45,7 +47,9 @@ class CqButton extends StatelessWidget {
             : BoxDecoration(
                 color: Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: cqMediumGreyColor, width: 1)),
+                border: Border.all(
+                    color: !outlineblue ? cqMediumGreyColor : cqPrimaryColor,
+                    width: 1)),
         child: !busy
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +63,11 @@ class CqButton extends StatelessWidget {
                     style: bodyStyle.copyWith(
                         fontWeight:
                             !outline ? FontWeight.bold : FontWeight.w400,
-                        color: !outline ? Colors.white : cqMediumGreyColor),
+                        color: !outline
+                            ? Colors.white
+                            : !outlineblue
+                                ? cqMediumGreyColor
+                                : cqPrimaryColor),
                   )
                 ],
               )

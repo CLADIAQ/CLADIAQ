@@ -13,7 +13,7 @@ class SettingsView extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: screenHeight(context) * 0.53,
+            height: screenHeight(context) * 0.6,
             child: ListView.separated(
               itemCount: items.length,
               separatorBuilder: (context, index) =>

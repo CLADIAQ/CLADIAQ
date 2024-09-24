@@ -19,7 +19,7 @@ class SettingsPage extends StatelessWidget {
             verticalSpaceSmall,
             const CqProfileImg(),
             SizedBox(
-                height: screenHeight(context) * 0.6,
+                height: screenHeight(context) * 0.7,
                 child: const SettingsView())
           ],
         ),

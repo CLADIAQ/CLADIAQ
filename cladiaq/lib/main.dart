@@ -9,6 +9,7 @@ import 'package:cladiaq/device_data/services/device_data_service.dart';
 import 'package:cladiaq/home/home_view.dart';
 import 'package:cladiaq/login/bloc/login_bloc.dart';
 import 'package:cladiaq/login/login_view.dart';
+import 'package:cladiaq/news/news.dart';
 import 'package:cladiaq/onboarding/onboarding_view.dart';
 import 'package:cladiaq/settings/settings_page.dart';
 import 'package:cladiaq/signup/bloc/registration_bloc.dart';
@@ -56,11 +57,10 @@ class MyApp extends StatelessWidget {
               ),
         ),
         routes: {
-          "/": (context) =>
-              onboarding ? const OnboardingView() : const HomeView(),
+          "/": (context) => onboarding ? const OnboardingView() : HomePage(),
           "/dashboard": (context) => const HomePage(),
           "/login": (context) => const LogIn(),
-          "/news": (context) => SensorDataPage(),
+          "/news": (context) => NewsPage(),
           "/ai": (context) => SensorDataPage(),
           "/settings": (context) => const SettingsPage()
         },

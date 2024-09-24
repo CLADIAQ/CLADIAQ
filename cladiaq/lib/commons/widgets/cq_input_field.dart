@@ -1,4 +1,7 @@
 import 'package:cladiaq/commons/colors.dart';
+import 'package:cladiaq/commons/ui_helpers.dart';
+import 'package:cladiaq/commons/widgets/cq_button.dart';
+import 'package:cladiaq/commons/widgets/cq_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
@@ -65,8 +68,50 @@ class _CqInputFieldState extends State<CqInputField> {
                   context: context,
                   builder: (context) {
                     return Center(
-                      child: Text("Verification Code"),
-                    );
+                        child: Container(
+                      padding: EdgeInsets.all(16),
+                      height: screenHeight(context) * 0.26,
+                      width: screenWidth(context) * 0.8,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            child: Column(
+                              children: [
+                                CqText.heading3("Logout"),
+                                verticalSpaceSmall,
+                                CqText.body(
+                                    "Are you sure you want to log out? You'll need to login again to use the app."),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 130,
+                                height: 40,
+                                child: CqButton(
+                                    title: "Cancel",
+                                    outline: true,
+                                    outlineblue: true,
+                                    onPressedCq: () {}),
+                              ),
+                              horizontalSpaceSmall,
+                              SizedBox(
+                                width: 130,
+                                height: 40,
+                                child: CqButton(
+                                    title: "Logout", onPressedCq: () {}),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ));
                   });
             }, // end onSubmit
           )

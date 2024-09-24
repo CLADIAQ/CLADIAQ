@@ -5,8 +5,8 @@ import 'dart:convert';
 
 class UserRepository {
   final FlutterSecureStorage _storage = FlutterSecureStorage();
-  // final String _baseUrl = 'http://13.61.33.10:8000/api';
-  final String _baseUrl = 'http://10.0.2.2:8000/api';
+  final String _baseUrl = 'http://13.61.33.10:8000/api';
+  // final String _baseUrl = 'http://10.0.2.2:8000/api';
 
   Future<void> login(String email, String password) async {
     final response = await http.post(
