@@ -1,113 +1,101 @@
-import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
 
 class TemperatureChart extends StatelessWidget {
-  final List<double> temperatures; // Temperature data
-  final List<String> hours; // Time labels
+  final double upperLimit = 30; // Upper limit for poor temperature (blue line)
+  final double lowerLimit = 10; // Lower limit for harsh temperature (red line)
+  final double normalTemp = 20; // Normal room temperature (green line)
 
-  TemperatureChart({required this.temperatures, required this.hours});
+  final List<FlSpot> temperatureReadings = [
+    FlSpot(0, 5), // Cold (Blue)
+    FlSpot(1, 15), // Normal (Green)
+    FlSpot(2, 25), // Normal (Green)
+    FlSpot(3, 35), // Hot (Red)
+    FlSpot(4, 28), // Normal (Green)
+    FlSpot(5, 8), // Cold (Blue)
+    FlSpot(6, 40), // Hot (Red)
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
-      padding: const EdgeInsets.all(16.0),
       child: LineChart(
         LineChartData(
-          gridData: FlGridData(show: false),
+          minX: 0,
+          maxX: 6,
+          minY: 0,
+          maxY: 45,
+          gridData: FlGridData(show: true),
           titlesData: FlTitlesData(
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                reservedSize: 38,
-                getTitlesWidget: (value, meta) {
-                  return SideTitleWidget(
-                    axisSide: meta.axisSide,
-                    child: Text(hours[value.toInt()]),
-                  );
-                },
-              ),
-            ),
-            leftTitles: AxisTitles(
-              sideTitles: SideTitles(showTitles: true),
-            ),
+            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: true)),
+            bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: true)),
           ),
           borderData: FlBorderData(
-              show: true, border: Border.all(color: Colors.black, width: 1)),
-          minX: 0,
-          maxX: temperatures.length.toDouble() - 1,
-          minY: 15,
-          maxY: 40,
+            show: true,
+            border: Border.all(color: Colors.black, width: 1),
+          ),
           lineBarsData: [
+            // Main temperature line with colored dots
             LineChartBarData(
-              spots: _getChartData(),
+              spots: temperatureReadings,
               isCurved: true,
-              gradient: LinearGradient(
-                colors: _getLineColors(),
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-              ),
-              belowBarData: BarAreaData(
-                show: true,
-                gradient: LinearGradient(
-                  colors: _getLineColors(),
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ),
-              ),
-              dotData: FlDotData(show: true),
+              color: Colors.grey,
+              dotData: FlDotData(
+                  show: true,
+                  getDotPainter: (spot, percent, barData, index) {
+                    Color dotColor;
+
+                    if (spot.y <= lowerLimit) {
+                      dotColor = Colors.blue; // Cold (below lower limit)
+                    } else if (spot.y > lowerLimit && spot.y <= upperLimit) {
+                      dotColor = Colors.green; // Normal temperature
+                    } else {
+                      dotColor = Colors.red; // Hot (above upper limit)
+                    }
+
+                    return FlDotCirclePainter(
+                      radius: 4,
+                      color: dotColor,
+                      strokeWidth: 0,
+                    );
+                  }),
+              belowBarData: BarAreaData(show: false),
+            ),
+            // Upper limit (poor temperature)
+            LineChartBarData(
+              spots: [
+                FlSpot(0, upperLimit),
+                FlSpot(6, upperLimit),
+              ],
+              isCurved: false,
+              color: Colors.red,
+              barWidth: 2,
+              dotData: FlDotData(show: false),
+            ),
+            // Normal room temperature line
+            LineChartBarData(
+              spots: [
+                FlSpot(0, normalTemp),
+                FlSpot(6, normalTemp),
+              ],
+              isCurved: false,
+              color: Colors.green,
+              barWidth: 2,
+              dotData: FlDotData(show: false),
+            ),
+            // Lower limit (harsh temperature)
+            LineChartBarData(
+              spots: [
+                FlSpot(0, lowerLimit),
+                FlSpot(6, lowerLimit),
+              ],
+              isCurved: false,
+              color: Colors.blue,
+              barWidth: 2,
+              dotData: FlDotData(show: false),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  List<FlSpot> _getChartData() {
-    return List.generate(temperatures.length,
-        (index) => FlSpot(index.toDouble(), temperatures[index]));
-  }
-
-  List<Color> _getLineColors() {
-    return temperatures.map((temp) {
-      if (temp >= 30) return Colors.red; // Above normal
-      if (temp <= 22) return Colors.blue; // Below normal
-      return Colors.green; // Normal
-    }).toList();
-  }
-
-  Color _getAreaColor() {
-    return Colors.green.withOpacity(0.3);
-  }
-}
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // Example data
-    List<double> temperatures = [20, 25, 28, 30, 32, 22, 18, 29, 31];
-    List<String> hours = [
-      "1 AM",
-      "2 AM",
-      "3 AM",
-      "4 AM",
-      "5 AM",
-      "6 AM",
-      "7 AM",
-      "8 AM",
-      "9 AM"
-    ];
-
-    return MaterialApp(
-      title: 'Temperature Chart Example',
-      home: Scaffold(
-        appBar: AppBar(title: Text('Temperature vs Time')),
-        body: Center(
-          child: TemperatureChart(temperatures: temperatures, hours: hours),
         ),
       ),
     );

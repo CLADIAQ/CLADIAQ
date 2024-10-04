@@ -2,10 +2,16 @@ import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/ui_helpers.dart';
 import 'package:cladiaq/commons/widgets/cq_button.dart';
 import 'package:cladiaq/commons/widgets/cq_icon_button.dart';
+import 'package:cladiaq/commons/widgets/cq_text.dart';
 import 'package:cladiaq/device_data/bloc/device_data_bloc.dart';
 import 'package:cladiaq/device_data/bloc/device_data_state.dart';
+import 'package:cladiaq/home/widgets/atm_sound_widget.dart';
+import 'package:cladiaq/home/widgets/cq_commands.dart';
+import 'package:cladiaq/home/widgets/cq_recommendation_widget.dart';
 import 'package:cladiaq/home/widgets/gas_widget.dart';
+import 'package:cladiaq/home/widgets/remark.dart';
 import 'package:cladiaq/home/widgets/search_bar.dart';
+import 'package:cladiaq/home/widgets/summary_aqi.dart';
 import 'package:cladiaq/home/widgets/temp_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:cladiaq/commons/widgets/cq_app_bar.dart';
@@ -36,16 +42,20 @@ class HomePage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xffF1F4FA),
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: Text("Orange, Sudanesse"),
-          centerTitle: true,
+        appBar: CqAppBar(
+          hasNotifications: true,
+          title: "Ntye Nina",
         ),
+        //  AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   title: Text("Orange, Sudanesse"),
+        //   centerTitle: true,
+        // ),
         body: Stack(
           children: [
             Container(
               decoration: const BoxDecoration(
-                color: Colors.transparent, // Set the body color to transparent
+                color: Color(0xffF0F9FF), // Set the body color to transparent
               ),
               child: Center(
                 child: Container(
@@ -56,7 +66,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         SizedBox(
                           height: 25,
-                          width: 300,
+                          width: 350,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -64,10 +74,15 @@ class HomePage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   CqIconButton(icon: "GAS", onPressedCq: () {}),
-                                  horizontalSpaceSmall,
+                                  horizontalSpaceTiny,
                                   CqIconButton(
-                                      disabled: false,
+                                      disabled: true,
                                       icon: "ATM",
+                                      onPressedCq: () {}),
+                                  horizontalSpaceTiny,
+                                  CqIconButton(
+                                      disabled: true,
+                                      icon: "ENV",
                                       onPressedCq: () {}),
                                   // CqIconButton(
                                   //     icon: "assets/icons/humidity.svg",
@@ -94,16 +109,42 @@ class HomePage extends StatelessWidget {
                                   //     onPressedCq: () {})
                                 ],
                               ),
-                              CqSearchBar()
+                              SizedBox(
+                                height: 24,
+                                width: 100,
+                                child: Stack(
+                                  children: [
+                                    CqButton(
+                                      title: "Devices",
+                                      onPressedCq: () {},
+                                    ),
+                                    Positioned(
+                                      right: 0,
+                                      child: Icon(
+                                        Icons.arrow_drop_down,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         ),
+                        verticalSpaceTiny,
+                        CqText.heading3("My Office"),
+                        AqiSumHome(),
 
+                        AQIRemark(),
+
+                        // AtmSound(),
+                        // verticalSpaceSmall,
+                        CqRecommendationWidget(),
+
+                        CqCommands(),
+                        verticalSpaceLarge,
+                        TemperatureChart(),
                         verticalSpaceSmall,
-                        TemperatureChart(
-                          temperatures: temperatures,
-                          hours: hours,
-                        ),
                         SizedBox(
                           height: 75,
                           child: Row(
@@ -165,7 +206,6 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-
                         const Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -202,22 +242,22 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        // BlocBuilder<DeviceDataBloc, DeviceDataState>(
-                        //   builder: (context, state) {
-                        //     if (state is DeviceDataLoaded) {
-                        //       // final List<double> temp = state.deviceData
-                        //       //     .map((data) => data.temperature!)
-                        //       //     .toList();
-                        //       // final List<String> time = state.deviceData
-                        //       //     .map((data) => data.deviceId.toString())
-                        //       //     .toList();
-                        //       return LineChartWidget(
-                        //         sensorDataList: state.deviceData,
-                        //       );
-                        //     } else
-                        //       return Container();
-                        //   },
-                        // ),
+                        BlocBuilder<DeviceDataBloc, DeviceDataState>(
+                          builder: (context, state) {
+                            if (state is DeviceDataLoaded) {
+                              // final List<double> temp = state.deviceData
+                              //     .map((data) => data.temperature!)
+                              //     .toList();
+                              // final List<String> time = state.deviceData
+                              //     .map((data) => data.deviceId.toString())
+                              //     .toList();
+                              return LineChartWidget(
+                                sensorDataList: state.deviceData,
+                              );
+                            } else
+                              return Container();
+                          },
+                        ),
                         verticalSpaceSmall,
                         MapWidget(),
                         verticalSpaceSmall,

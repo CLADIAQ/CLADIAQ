@@ -6,6 +6,7 @@ import 'package:cladiaq/commons/repository/user_repository.dart';
 import 'package:cladiaq/device_data/bloc/device_data_bloc.dart';
 import 'package:cladiaq/device_data/device_data_view.dart';
 import 'package:cladiaq/device_data/services/device_data_service.dart';
+import 'package:cladiaq/home/bloc/home_bloc.dart';
 import 'package:cladiaq/home/home_view.dart';
 import 'package:cladiaq/login/bloc/login_bloc.dart';
 import 'package:cladiaq/login/login_view.dart';
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => RegistrationBloc(authenticationService),
         ),
-        BlocProvider(create: (context) => DeviceDataBloc(deviceDataService))
+        BlocProvider(create: (context) => DeviceDataBloc(deviceDataService)),
+        BlocProvider(create: (context) => HomeBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

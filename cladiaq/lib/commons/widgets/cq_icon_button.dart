@@ -18,7 +18,7 @@ class CqIconButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressedCq,
       child: Container(
-          width: 55,
+          width: 40,
           height: 22,
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -26,8 +26,9 @@ class CqIconButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
               border: Border.all(width: 1, color: cqPrimaryColor)),
           child: Text(icon,
-              style:
-                  TextStyle(color: !disabled ? Colors.white : cqPrimaryColor))),
+              style: TextStyle(
+                  color: !disabled ? Colors.white : cqPrimaryColor,
+                  fontSize: 9))),
     );
   }
 }
