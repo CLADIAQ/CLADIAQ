@@ -2,7 +2,7 @@
 import 'package:cladiaq/commons/data/model/models.dart';
 import 'package:cladiaq/commons/data/services/authentication_service.dart';
 import 'package:cladiaq/commons/repository/user_repository.dart';
-import 'package:cladiaq/commons/widgets/cq_buttomn_nav_bar.dart';
+import 'package:cladiaq/commons/widgets/buttom_navigation/cq_buttomn_nav_bar.dart';
 import 'package:cladiaq/device_data/bloc/device_data_bloc.dart';
 import 'package:cladiaq/device_data/bloc/device_data_event.dart';
 import 'package:cladiaq/device_data/bloc/device_data_state.dart';

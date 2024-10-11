@@ -22,12 +22,12 @@ class CqIconButton extends StatelessWidget {
           height: 22,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-              color: !disabled ? cqPrimaryColor : Colors.white,
+              color: disabled ? cqPrimaryColor : Colors.white,
               borderRadius: BorderRadius.circular(5),
               border: Border.all(width: 1, color: cqPrimaryColor)),
           child: Text(icon,
               style: TextStyle(
-                  color: !disabled ? Colors.white : cqPrimaryColor,
+                  color: disabled ? Colors.white : cqPrimaryColor,
                   fontSize: 9))),
     );
   }

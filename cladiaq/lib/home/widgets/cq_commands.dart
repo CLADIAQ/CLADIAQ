@@ -24,7 +24,7 @@ class CqCommands extends StatelessWidget {
 Widget CommandButton(String command, String asset, {String? name}) {
   return Container(
     margin: EdgeInsets.all(8),
-    height: 100,
+    height: 92,
     width: 150,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),

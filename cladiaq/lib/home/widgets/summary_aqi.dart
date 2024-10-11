@@ -8,6 +8,7 @@ class AqiSumHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 280,
       padding: EdgeInsets.all(4),
       height: 124,
       child: Row(
@@ -24,19 +25,25 @@ class AqiSumHome extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Color(0xff81CEF9),
                 borderRadius: BorderRadius.circular(16)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Stack(
+              alignment: AlignmentDirectional.center,
               children: [
-                Text(
-                  "AQI",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+                Positioned(
+                  top: 20,
+                  child: Text(
+                    "AQI",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                  ),
                 ),
-                Text(
-                  "180",
-                  style: TextStyle(
-                      color: cqPrimaryColor,
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold),
+                Positioned(
+                  bottom: 20,
+                  child: Text(
+                    "180",
+                    style: TextStyle(
+                        color: Color(0xffffde33),
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold),
+                  ),
                 )
               ],
             ),
@@ -55,5 +62,5 @@ class AqiSumHome extends StatelessWidget {
 Widget sumText(String text) {
   return Text(text,
       style: TextStyle(
-          fontSize: 30, fontWeight: FontWeight.w400, color: Color(0xffA6A6A6)));
+          fontSize: 20, fontWeight: FontWeight.w400, color: Color(0xffA6A6A6)));
 }

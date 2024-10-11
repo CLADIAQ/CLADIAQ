@@ -14,6 +14,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(HomeHomeState());
     });
     on<AtmButtonClickedEvent>((event, emit) {
+      print("I have been clickced");
       emit(HomeAtmState());
     });
     on<GasButtonClickedEvent>((event, emit) {

@@ -41,8 +41,10 @@ class _LogInState extends State<LogIn> {
                 Navigator.pushReplacementNamed(context, '/dashboard');
               } else if (state is LoginFailure) {
                 // Show error message
+
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(state.error)));
+                    Navigator.pushReplacementNamed(context, '/dashboard');
               } else if (state is LoginLoading) {
                 // Show error message
                 ScaffoldMessenger.of(context)

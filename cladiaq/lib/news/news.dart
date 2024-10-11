@@ -1,4 +1,4 @@
-import 'package:cladiaq/commons/widgets/cq_buttomn_nav_bar.dart';
+import 'package:cladiaq/commons/widgets/buttom_navigation/cq_buttomn_nav_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:webfeed/webfeed.dart';
 import 'package:flutter/material.dart';

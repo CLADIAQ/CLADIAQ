@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cladiaq/commons/colors.dart';
 import 'package:cladiaq/commons/data/services/authentication_service.dart';
 import 'package:cladiaq/commons/repository/user_repository.dart';
+import 'package:cladiaq/commons/widgets/buttom_navigation/bloc/buttom_navigation_bloc.dart';
 import 'package:cladiaq/device_data/bloc/device_data_bloc.dart';
 import 'package:cladiaq/device_data/device_data_view.dart';
 import 'package:cladiaq/device_data/services/device_data_service.dart';
@@ -48,7 +49,10 @@ class MyApp extends StatelessWidget {
           create: (context) => RegistrationBloc(authenticationService),
         ),
         BlocProvider(create: (context) => DeviceDataBloc(deviceDataService)),
-        BlocProvider(create: (context) => HomeBloc())
+        BlocProvider(create: (context) => HomeBloc()..add(HomeStartEvent())),
+        BlocProvider(
+            create: (context) =>
+                ButtomNavigationBloc()..add(HomeButtonClicked()))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -59,7 +63,8 @@ class MyApp extends StatelessWidget {
               ),
         ),
         routes: {
-          "/": (context) => onboarding ? const OnboardingView() : HomePage(),
+          "/": (context) =>
+              onboarding ? const OnboardingView() : const HomePage(),
           "/dashboard": (context) => const HomePage(),
           "/login": (context) => const LogIn(),
           "/news": (context) => NewsPage(),

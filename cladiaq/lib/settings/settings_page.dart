@@ -1,6 +1,6 @@
 import 'package:cladiaq/commons/ui_helpers.dart';
+import 'package:cladiaq/commons/widgets/buttom_navigation/cq_buttomn_nav_bar.dart';
 import 'package:cladiaq/commons/widgets/cq_app_bar.dart';
-import 'package:cladiaq/commons/widgets/cq_buttomn_nav_bar.dart';
 import 'package:cladiaq/commons/widgets/cq_profile_img.dart';
 import 'package:cladiaq/settings/settings_view.dart';
 import 'package:flutter/material.dart';
