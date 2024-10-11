@@ -12,104 +12,98 @@ class CqButtomnNavBar extends StatefulWidget {
 }
 
 class _CqButtomnNavBarState extends State<CqButtomnNavBar> {
-  // int _selectedIndex = 3;
-
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-
-  // Navigate to the respective page based on index
-  // switch (index) {
-  //   case 0:
-  //     Navigator.of(context).pushNamed("/dashboard");
-  //     break;
-  //   case 1:
-  //     break;
-  //   case 2:
-  //     Navigator.of(context).pushNamed('/ai');
-  //     break;
-  //   case 3:
-  //     Navigator.of(context).pushNamed('/settings');
-  //     break;
-  // }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ButtomNavigationBloc, ButtomNavigationState>(
       builder: (context, state) {
-        return Container(
-          height: 50,
-          color: Colors.transparent,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              _BottomBarItem(
-                onTap: () {
-                  BlocProvider.of<ButtomNavigationBloc>(context)
-                      .add(HomeButtonClicked());
-                  Navigator.of(context).pushNamed('/dashboard');
-                },
-                icon: SvgPicture.asset(
-                  "assets/icons/cq_home.svg",
-                  color: state is ButtomNavigationHome
-                      ? Colors.blue
-                      : cqMediumGreyColor,
-                  height: 20,
-                  width: 20,
+        return WillPopScope(
+          onWillPop: () async {
+            // Get the current route
+            final currentRoute = ModalRoute.of(context)?.settings.name;
+
+            // Detect if the back navigation leads to the home page
+            if (currentRoute != '/dashboard') {
+              // Simulate clicking the Home button to dispatch the event
+              BlocProvider.of<ButtomNavigationBloc>(context)
+                  .add(HomeButtonClicked());
+              Navigator.of(context)
+                  .pushNamed('/dashboard'); // Navigate to the home page
+              return false; // Prevent the default back action (since we are handling it)
+            }
+            return true; // Allow back navigation if already on the home page
+          },
+          child: Container(
+            height: 50,
+            color: Colors.transparent,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                _BottomBarItem(
+                  onTap: () {
+                    BlocProvider.of<ButtomNavigationBloc>(context)
+                        .add(HomeButtonClicked());
+                    Navigator.of(context).pushNamed('/dashboard');
+                  },
+                  icon: SvgPicture.asset(
+                    "assets/icons/cq_home.svg",
+                    color: state is ButtomNavigationHome
+                        ? Colors.blue
+                        : cqMediumGreyColor,
+                    height: 20,
+                    width: 20,
+                  ),
+                  label: 'Home',
                 ),
-                label: 'Home',
-              ),
-              _BottomBarItem(
-                onTap: () {
-                  BlocProvider.of<ButtomNavigationBloc>(context)
-                      .add(NewsButtonClicked());
-                  Navigator.of(context).pushNamed('/news');
-                },
-                icon: SvgPicture.asset(
-                  "assets/icons/cq_news.svg",
-                  color: state is ButtomNavigationNews
-                      ? Colors.blue
-                      : cqMediumGreyColor,
-                  height: 20,
-                  width: 20,
+                _BottomBarItem(
+                  onTap: () {
+                    BlocProvider.of<ButtomNavigationBloc>(context)
+                        .add(NewsButtonClicked());
+                    Navigator.of(context).pushNamed('/news');
+                  },
+                  icon: SvgPicture.asset(
+                    "assets/icons/cq_news.svg",
+                    color: state is ButtomNavigationNews
+                        ? Colors.blue
+                        : cqMediumGreyColor,
+                    height: 20,
+                    width: 20,
+                  ),
+                  label: 'News',
                 ),
-                label: 'News',
-              ),
-              _BottomBarItem(
-                onTap: () {
-                  BlocProvider.of<ButtomNavigationBloc>(context)
-                      .add(ChatBotButtonClicked());
-                  Navigator.of(context).pushNamed('/ai');
-                },
-                icon: SvgPicture.asset(
-                  "assets/icons/cq_ai.svg",
-                  color: state is ButtomNavigationChatBot
-                      ? Colors.blue
-                      : cqMediumGreyColor,
-                  height: 20,
-                  width: 20,
+                _BottomBarItem(
+                  onTap: () {
+                    BlocProvider.of<ButtomNavigationBloc>(context)
+                        .add(ChatBotButtonClicked());
+                    Navigator.of(context).pushNamed('/ai');
+                  },
+                  icon: SvgPicture.asset(
+                    "assets/icons/cq_ai.svg",
+                    color: state is ButtomNavigationChatBot
+                        ? Colors.blue
+                        : cqMediumGreyColor,
+                    height: 20,
+                    width: 20,
+                  ),
+                  label: 'CLADIAQ AI',
                 ),
-                label: 'CLADIAQ AI',
-              ),
-              _BottomBarItem(
-                onTap: () {
-                  BlocProvider.of<ButtomNavigationBloc>(context)
-                      .add(SettingsButtonClicked());
-                  Navigator.of(context).pushNamed("/settings");
-                },
-                icon: SvgPicture.asset(
-                  "assets/icons/cq_settings.svg",
-                  color: state is ButtomNavigationSetting
-                      ? Colors.blue
-                      : cqMediumGreyColor,
-                  height: 20,
-                  width: 20,
+                _BottomBarItem(
+                  onTap: () {
+                    BlocProvider.of<ButtomNavigationBloc>(context)
+                        .add(SettingsButtonClicked());
+                    Navigator.of(context).pushNamed("/settings");
+                  },
+                  icon: SvgPicture.asset(
+                    "assets/icons/cq_settings.svg",
+                    color: state is ButtomNavigationSetting
+                        ? Colors.blue
+                        : cqMediumGreyColor,
+                    height: 20,
+                    width: 20,
+                  ),
+                  label: 'Settings',
                 ),
-                label: 'Settings',
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
